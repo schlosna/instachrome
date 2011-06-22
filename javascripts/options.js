@@ -10,7 +10,6 @@ var Options = function() {
         password: null,
         show_popup: '1',
         auto_close: false,
-        badge_style: 0,
         shortcut: {
             keyCode: 83,
             altKey: true,
@@ -29,7 +28,6 @@ var Options = function() {
         password: $('input#password'),
         show_popup: $('input#show_popup'),
         auto_close: $('input#auto_close'),
-        badge_style: $('select#badge_style'),
         shortcut: $('input#shortcut'),
         cx_read_later: $('input#cx_read_later'),
         cx_text_view: $('input#cx_text_view'),
@@ -46,34 +44,9 @@ var Options = function() {
         $('.column.label.auth').show('fast').removeClass('ok error');
         if(Instapaper.Auth.verifyCredentials(ui.username.val(), ui.password.val())) {
             $('.column.label.auth').addClass('ok').text('Your credentials are valid.');
-            // getRSSfeed(username, password);
         } else {
             $('.column.label.auth').addClass('error').text('Your username or password is incorrect. Please double check them.');
         }
-    };
-
-    var getRSSfeed = function(user, pass) {
-       var xhr = new XMLHttpRequest();
-       var params='username=' + user + '&password=' + pass;
-       xhr.onreadystatechange = function() {
-          if(xhr.readyState == 4 &&
-                xhr.status == 200) {
-             var xhr2 = new XMLHttpRequest();
-             xhr2.onreadystatechange = function() {
-                if(xhr2.readyState == 4 &&
-                      xhr2.status == 200) {
-                   $.db('rssfeed',
-                         /"(http:\/\/www\.instapaper\.com\/rss\/[^"]*)"/.exec(
-                            xhr2.responseText)[1]);
-                }
-             };
-             xhr2.open('GET', 'https://www.instapaper.com/u', true);
-             xhr2.send();
-          }
-       }
-       xhr.open('POST', 'https://www.instapaper.com/user/login', true);
-       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-       xhr.send(params);
     };
 
     ui.username.bind('change', verifyCredentials);
@@ -83,8 +56,23 @@ var Options = function() {
         humanizeKeystrokes: function(e) {
             var key = "",
                 special = "";
-            if(e.keyCode >= 65 && e.keyCode <= 90) {
-                key = String.fromCharCode(e.keyCode);
+            if((e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 37 && e.keyCode <= 40)) {
+                switch(e.keyCode) {
+                    case 37:
+                        key = 'Left';
+                        break;
+                    case 38:
+                        key = 'Up';
+                        break;
+                    case 39:
+                        key = 'Right';
+                        break;
+                    case 40:
+                        key = 'Down';
+                        break;
+                    default:
+                        key = String.fromCharCode(e.keyCode);
+                }
                 if (e.ctrlKey) {
                     special += "Ctrl + ";
                 }
@@ -124,15 +112,8 @@ var Options = function() {
             if (dbOrDefault('cx_archive') === '1') {
                 ui.cx_archive.attr('checked', true);
             }
-            ui.badge_style.val(dbOrDefault('badge_style'));
             ui.shortcut.val(this.humanizeKeystrokes(dbOrDefault('shortcut')))
             .data('keys', dbOrDefault('shortcut'));
-
-            ui.badge_style.change(function () {
-                if(parseInt($(this).val()) == 3) {
-                    getRSSfeed(ui.username.val(), ui.password.val());
-                }
-            });
         },
 
         save: function() {
@@ -162,7 +143,6 @@ var Options = function() {
                 $.db('cx_unread', ui.cx_unread.is(':checked') ? '1': '0');
                 $.db('cx_starred', ui.cx_starred.is(':checked') ? '1': '0');
                 $.db('cx_archive', ui.cx_archive.is(':checked') ? '1': '0');
-                $.db('badge_style', ui.badge_style.val());
                 $.db('shortcut', ui.shortcut.data('keys'));
 
                 if(accessToken.subscription_is_active) {

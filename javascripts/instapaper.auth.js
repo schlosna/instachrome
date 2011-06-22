@@ -1,4 +1,7 @@
 Instapaper.Auth = new function (){
+    // Don't use these codes. If you want you can get yours very easily:
+    // http://www.instapaper.com/main/request_oauth_consumer_token
+    // I want to keep this extension as open source, so be nice.
     var consumerKey = 'kNfh6BSVMURjOGrYN7a0jdIyPxOwqujdtJpvC5ub6Ov74YNcic',
         consumerSecret = 'KxjIrl2Lgo6yzo2WEqGqOkzttEsEf4tiido5eF85VGIwRVyuKo';
 

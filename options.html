@@ -6,14 +6,18 @@
         <title>Instachrome Options</title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="javascripts/lib/elastic.js"></script>
-        <script type="text/javascript" src="javascripts/lib/sha1.js"></script>
-        <script type="text/javascript" src="javascripts/lib/oauth.js"></script>
+        <!--<script type="text/javascript" src="javascripts/lib/sha1.js"></script>-->
+        <!--<script type="text/javascript" src="javascripts/lib/oauth.js"></script>-->
         <script type="text/javascript" src="javascripts/lib/ajaxRequest.js"></script>
         <script type="text/javascript" src="javascripts/app.js"></script>
-        <script type="text/javascript" src="javascripts/instapaper.js"></script>
-        <script type="text/javascript" src="javascripts/instapaper.auth.js"></script>
-        <script type="text/javascript" src="javascripts/instapaper.api.js"></script>
+        <!--<script type="text/javascript" src="javascripts/instapaper.js"></script>-->
+        <!--<script type="text/javascript" src="javascripts/instapaper.api.js"></script>-->
+        <!--<script type="text/javascript" src="javascripts/instapaper.bookmarks.js"></script>-->
+        <!--<script type="text/javascript" src="javascripts/instapaper.auth.js"></script>-->
         <script type="text/javascript" src="javascripts/options.js"></script>
+        <script type="text/javascript" src="javascripts/chrome_ex_oauthsimple.js"></script>
+        <script type="text/javascript" src="javascripts/chrome_ex_oauth.js"></script>
+        
         <link href="stylesheets/elastic.css" rel="stylesheet" type="text/css" />
         <link href="stylesheets/options.css" rel="stylesheet" type="text/css" />
     </head>
@@ -69,18 +73,6 @@
                             </div>
                             <div class="column">
                                 <input type="checkbox" name="auto_close" class="vertical-center" id="auto_close" value="1" />
-                            </div>
-
-                            <div class="column label">
-                                <label for="badge_style" class="vertical-center">Badge style:</label>
-                            </div>
-                            <div class="column">
-                                <select name="badge_style" id="badge_style">
-                                    <option value="0">Text</option>
-                                    <option value="1">Tick/Circle/Cross Icons</option>
-                                    <option value="2">Chromed icons</option>
-                                    <option value="3">Text + unread count</option>
-                                </select>
                             </div>
 
                             <div class="column label">
