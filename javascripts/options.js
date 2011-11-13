@@ -43,46 +43,34 @@ var Options = function() {
     };
 
     var authenticateCredentials = function() {
-        var xhr = new XMLHttpRequest();
         var username = encodeURIComponent(ui.username.val());
         var password = encodeURIComponent(ui.password.val());
-        xhr.onreadystatechange = function(response) {
-            if(response.srcElement && response.srcElement.readyState == 4) {
-                $('.column.label.auth').show('fast').removeClass('ok error');
-                if(response.srcElement.status == 200) {
-                    $('.column.label.auth').addClass('ok').text('Your credentials are valid.');
-                    getRSSfeed(username, password);
-                } else {
-                    $('.column.label.auth').addClass('error').text('Your username or password is incorrect. Please double check them.');
-                }
-            }
-        }
-        xhr.open("GET", 'https://www.instapaper.com/api/authenticate?username=' + username + '&password=' + password, true);
-        xhr.send();
+        var url = 'https://www.instapaper.com/api/authenticate?username=' +
+            username + '&password=' + password;
+        $.ajax(url).always(function() {
+            $('.column.label.auth').show('fast').removeClass('ok error');
+        }).done(function() {
+            $('.column.label.auth').addClass('ok')
+                .text('Your credentials are valid.');
+            getRSSfeed(username, password);
+        }).fail(function() {
+            $('.column.label.auth').addClass('error')
+                .text('Your username or password is incorrect. ' +
+                      'Please double check them.');
+        });
     };
 
     var getRSSfeed = function(user, pass) {
-       var xhr = new XMLHttpRequest();
-       var params='username=' + user + '&password=' + pass;
-       xhr.onreadystatechange = function() {
-          if(xhr.readyState == 4 &&
-                xhr.status == 200) {
-             var xhr2 = new XMLHttpRequest();
-             xhr2.onreadystatechange = function() {
-                if(xhr2.readyState == 4 &&
-                      xhr2.status == 200) {
-                   $.db('rssfeed',
-                         /"(http:\/\/www\.instapaper\.com\/rss\/[^"]*)"/.exec(
-                            xhr2.responseText)[1]);
-                }
-             };
-             xhr2.open('GET', 'https://www.instapaper.com/u', true);
-             xhr2.send();
-          }
-       }
-       xhr.open('POST', 'https://www.instapaper.com/user/login', true);
-       xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-       xhr.send(params);
+        $.ajax('https://www.instapaper.com/user/login', {
+            type: 'POST',
+            data: { username: user, password: pass }
+        }).done(function() {
+            $.ajax('https://www.instapaper.com/u').done(function(data) {
+                    $.db('rssfeed',
+                         /"(http:\/\/www\.instapaper\.com\/rss\/[^"]*)"/
+                            .exec(data)[1]);
+            });
+        });
     };
 
     ui.username.bind('change', authenticateCredentials);
@@ -90,18 +78,18 @@ var Options = function() {
 
     return {
         humanizeKeystrokes: function(e) {
-            var key = "",
-                special = "";
-            if(e.keyCode >= 65 && e.keyCode <= 90) {
+            var key = '',
+                special = '';
+            if (e.keyCode >= 65 && e.keyCode <= 90) {
                 key = String.fromCharCode(e.keyCode);
                 if (e.ctrlKey) {
-                    special += "Ctrl + ";
+                    special += 'Ctrl + ';
                 }
                 if (e.altKey) {
-                    special += "Alt + ";
+                    special += 'Alt + ';
                 }
                 if (e.shiftKey) {
-                    special += "Shift + ";
+                    special += 'Shift + ';
                 }
             }
             return special + key;
@@ -109,7 +97,7 @@ var Options = function() {
 
         restore: function() {
             if (location.hash === '#setup') {
-                $.flash('Enter your Instapaper credentials in order to save an URL.');
+                $.flash('Enter your Instapaper credentials to save an URL.');
             }
             ui.username.val(dbOrDefault('username'));
             ui.password.val(dbOrDefault('password'));
@@ -138,8 +126,8 @@ var Options = function() {
             ui.shortcut.val(this.humanizeKeystrokes(dbOrDefault('shortcut')))
             .data('keys', dbOrDefault('shortcut'));
 
-            ui.badge_style.change(function () {
-                if(parseInt($(this).val()) == 3) {
+            ui.badge_style.change(function() {
+                if (parseInt($(this).val(), 10) == 3) {
                     getRSSfeed(ui.username.val(), ui.password.val());
                 }
             });
@@ -148,13 +136,13 @@ var Options = function() {
         save: function() {
             $.db('username', ui.username.val());
             $.db('password', ui.password.val());
-            $.db('show_popup', ui.show_popup.is(':checked') ? '1': '0');
-            $.db('auto_close', ui.auto_close.is(':checked') ? '1': '0');
-            $.db('cx_read_later', ui.cx_read_later.is(':checked') ? '1': '0');
-            $.db('cx_text_view', ui.cx_text_view.is(':checked') ? '1': '0');
-            $.db('cx_unread', ui.cx_unread.is(':checked') ? '1': '0');
-            $.db('cx_starred', ui.cx_starred.is(':checked') ? '1': '0');
-            $.db('cx_archive', ui.cx_archive.is(':checked') ? '1': '0');
+            $.db('show_popup', ui.show_popup.is(':checked') ? '1' : '0');
+            $.db('auto_close', ui.auto_close.is(':checked') ? '1' : '0');
+            $.db('cx_read_later', ui.cx_read_later.is(':checked') ? '1' : '0');
+            $.db('cx_text_view', ui.cx_text_view.is(':checked') ? '1' : '0');
+            $.db('cx_unread', ui.cx_unread.is(':checked') ? '1' : '0');
+            $.db('cx_starred', ui.cx_starred.is(':checked') ? '1' : '0');
+            $.db('cx_archive', ui.cx_archive.is(':checked') ? '1' : '0');
             $.db('badge_style', ui.badge_style.val());
             $.db('shortcut', ui.shortcut.data('keys'));
 

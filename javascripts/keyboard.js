@@ -16,8 +16,10 @@ window.addEventListener('keydown', function(e) {
         ctrlKey: e.ctrlKey,
         shiftKey: e.shiftKey
     }}, function(response) {
-        if(response.shortcutPressed) {
-            chrome.extension.sendRequest({selection: getWindowSelection()}, function(r) {});
+        if (response.shortcutPressed) {
+            chrome.extension.sendRequest(
+                {selection: getWindowSelection()},
+                function(r) {});
         }
     });
 }, false);

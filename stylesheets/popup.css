@@ -24,28 +24,28 @@ ul.links li > a {
     background: #eee 4px 5px no-repeat;
 }
 
-ul.links li > a.add {
+ul.links li > #add {
     background-image: url("../images/add.png");
     border-radius: 5px 5px 0 0;
 }
 
-ul.links li > a.text {
+ul.links li > #text {
     background-image: url("../images/text_view.png");
 }
 
-ul.links li > a.unread {
+ul.links li > #unread {
     background-image: url("../images/unread.png");
 }
 
-ul.links li > a.starred {
+ul.links li > #starred {
     background-image: url("../images/starred.png");
 }
 
-ul.links li > a.archive {
+ul.links li > #archive {
     background-image: url("../images/archive.png");
 }
 
-ul.links li > a.options {
+ul.links li > #options {
     background-image: url("../images/options.png");
     border-radius: 0 0 5px 5px;
 }
