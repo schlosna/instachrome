@@ -1,100 +1,96 @@
 a {
-    color: #DC8145;
+  color: #DC8145;
 }
 
 a.ribbon {
-    top: 0;
-    position: absolute;
-    border: 0;
-    display: block;
-    width: 149px;
-    height: 149px;
+  top: 0;
+  position: absolute;
+  border: 0;
+  display: block;
+  width: 149px;
+  height: 149px;
 }
 a.ribbon.right {
-    right: 0;
-    background: url("../images/forkme_ribbon.png") 0 0 no-repeat;
-}
-a.ribbon.left {
-    left: 0;
-    background: url("../images/donation_ribbon.png") 0 0 no-repeat;
+  right: 0;
+  background: url("../images/forkme_ribbon.png") 0 0 no-repeat;
 }
 
 .wrapper {
-    width: 500px;
-    margin: 20px auto;
+  width: 500px;
+  margin: 20px auto;
 }
 
 .flash {
-    background: #FFFFCC;
-    border: 1px solid #cccc00;
-    padding: 5px 0;
-    color: #666;
-    text-align: center;
-    margin: 10px 0;
-    display: none;
-    cursor: pointer;
+  background: #FFFFCC;
+  border: 1px solid #cccc00;
+  padding: 5px 0;
+  color: #666;
+  text-align: center;
+  margin: 10px 0;
+  display: none;
+  cursor: pointer;
 }
 
 .title {
-    font-family: "Times New Roman";
-    font-size: 2em;
+  font-family: "Times New Roman";
+  font-size: 2em;
 }
 
 .set {
-    border: 1px solid #C7E2EF;
-    border-radius: 3px;
-    background-color: #ededed;
+  border: 1px solid #C7E2EF;
+  border-radius: 3px;
+  background-color: #ededed;
 }
 
 .set > legend {
-    margin-left: 12px;
-    color: #52A8CF;
-    text-shadow: 1px 1px 1px #ccc;
-    cursor: default;
+  margin-left: 12px;
+  color: #52A8CF;
+  text-shadow: 1px 1px 1px #ccc;
+  cursor: default;
 }
 
 .set > .pad {
-    padding: 6px;
+  padding: 6px;
 }
 
 .set .column.label {
-    text-align: center;
-    color: #888;
+  text-align: center;
+  color: #888;
 }
 
 .set .column.label > .description {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .set .column > input.text {
-    border: 1px solid #ccc;
-    padding: 4px;
-    margin: 3px 0;
-    color: #52A8CF;
-    border-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  margin: 3px 0;
+  color: #52A8CF;
+  border-radius: 3px;
 }
 
 .column.label.auth {
-    line-height: 35px;
-    display: none;
-    font-size: 10px;
+  line-height: 35px;
+  display: none;
+  font-size: 10px;
 }
 
 .column.label.auth.ok {
-    color: green;
+  color: green;
 }
 
 .column.label.auth.error {
-    color: red;
+  color: red;
 }
 
 .footer {
-    font-size: 0.8em;
-    color: #888;
-    text-align: center;
-    margin-top: 10em;
+  font-size: 0.8em;
+  color: #888;
+  text-align: center;
+  margin-top: 10em;
 }
 
 .footer a {
-    color: #333;
+  color: #333;
 }

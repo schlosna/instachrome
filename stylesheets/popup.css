@@ -1,55 +1,58 @@
 body {
-    margin: 0;
+  margin: 0;
+  width: 8em;
 }
 
 ul.links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 130px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 8em;
 }
 
 ul.links li {
-    margin: 0;
-    font-size: 13px;
+  margin: 0;
+  font-size: 10pt;
 }
 
 ul.links li > a {
-    padding: 5px 0 5px 30px;
-    display: block;
-    height: 16px;
-    text-decoration: none;
-    color: #888;
-    font-family: sans-serif;
-    background: #eee 4px 5px no-repeat;
+  padding: 5px 0 5px 30px;
+  display: block;
+  height: 16px;
+  text-decoration: none;
+  color: #888;
+  font-family: sans-serif;
+  background: #eee 4px 5px no-repeat;
+  outline: none;
 }
 
 ul.links li > #add {
-    background-image: url("../images/add.png");
-    border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  background-image: url("../images/add.png");
 }
 
 ul.links li > #text {
-    background-image: url("../images/text_view.png");
+  background-image: url("../images/text_view.png");
 }
 
 ul.links li > #unread {
-    background-image: url("../images/unread.png");
+  background-image: url("../images/unread.png");
 }
 
 ul.links li > #starred {
-    background-image: url("../images/starred.png");
+  background-image: url("../images/starred.png");
 }
 
 ul.links li > #archive {
-    background-image: url("../images/archive.png");
+  background-image: url("../images/archive.png");
 }
 
 ul.links li > #options {
-    background-image: url("../images/options.png");
-    border-radius: 0 0 5px 5px;
+  background-image: url("../images/options.png");
+  border-radius: 0 0 5px 5px;
 }
 
 ul.links li > a:hover {
-    color: #85C25A;
+  color: #85C25A;
 }
+
